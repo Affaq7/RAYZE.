@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>RAYZE Admin</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+</head>
+<body>
+
+<div id="login-view">
+  <div class="login-box">
+    <h1>RAYZE Admin</h1>
+    <form id="login-form">
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="username">
+      </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Log in</button>
+      <div id="login-status" class="status-msg"></div>
+    </form>
+  </div>
+</div>
+
+<div id="dashboard-view" hidden>
+  <div class="wrap">
+    <div class="topbar">
+      <h1>RAYZE Admin</h1>
+      <button id="logout-btn" class="btn btn-small">Log out</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="portfolio-panel">Portfolio</button>
+      <button class="tab-btn" data-tab="reviews-panel">Reviews</button>
+    </div>
+
+    <section id="portfolio-panel" class="tab-panel active">
+      <div class="form-card">
+        <h2 id="portfolio-form-title">Add portfolio item</h2>
+        <form id="portfolio-form">
+          <input type="hidden" id="portfolio-id">
+          <div class="form-field">
+            <label for="portfolio-title">Title</label>
+            <input type="text" id="portfolio-title" required maxlength="200">
+          </div>
+          <div class="form-field">
+            <label for="portfolio-slug">Slug</label>
+            <input type="text" id="portfolio-slug" required maxlength="220" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="northfield-rebrand-launch">
+          </div>
+          <div class="form-field">
+            <label for="portfolio-client">Client name</label>
+            <input type="text" id="portfolio-client" required maxlength="200">
+          </div>
+          <div class="form-field">
+            <label for="portfolio-category">Category</label>
+            <input type="text" id="portfolio-category" required maxlength="100">
+          </div>
+          <div class="form-field">
+            <label for="portfolio-description">Description</label>
+            <textarea id="portfolio-description" required maxlength="5000"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="portfolio-cover">Cover image URL</label>
+            <input type="url" id="portfolio-cover" maxlength="1000" placeholder="https://...">
+          </div>
+          <div class="form-field">
+            <label for="portfolio-project-url">Behance / project link</label>
+            <input type="url" id="portfolio-project-url" maxlength="1000" placeholder="https://www.behance.net/gallery/...">
+          </div>
+          <div class="checkbox-field">
+            <input type="checkbox" id="portfolio-published">
+            <label for="portfolio-published">Published (visible on the public site)</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" id="portfolio-cancel-edit" class="btn btn-small" hidden>Cancel edit</button>
+          <div id="portfolio-form-status" class="status-msg"></div>
+        </form>
+      </div>
+
+      <h2>Existing items</h2>
+      <div id="portfolio-list"><p>Loading…</p></div>
+    </section>
+
+    <section id="reviews-panel" class="tab-panel">
+      <div class="form-card">
+        <h2 id="review-form-title">Add review</h2>
+        <form id="review-form">
+          <input type="hidden" id="review-id">
+          <div class="form-field">
+            <label for="review-client">Client name</label>
+            <input type="text" id="review-client" required maxlength="200">
+          </div>
+          <div class="form-field">
+            <label for="review-company">Company (optional)</label>
+            <input type="text" id="review-company" maxlength="200">
+          </div>
+          <div class="form-field">
+            <label for="review-avatar">Avatar image URL (optional — falls back to initials)</label>
+            <input type="url" id="review-avatar" maxlength="1000" placeholder="https://...">
+          </div>
+          <div class="form-field">
+            <label for="review-quote">Quote</label>
+            <textarea id="review-quote" required maxlength="2000"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="review-rating">Rating</label>
+            <select id="review-rating" required>
+              <option value="5">5 / 5</option>
+              <option value="4">4 / 5</option>
+              <option value="3">3 / 5</option>
+              <option value="2">2 / 5</option>
+              <option value="1">1 / 5</option>
+            </select>
+          </div>
+          <div class="checkbox-field">
+            <input type="checkbox" id="review-published">
+            <label for="review-published">Published (visible on the public site)</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" id="review-cancel-edit" class="btn btn-small" hidden>Cancel edit</button>
+          <div id="review-form-status" class="status-msg"></div>
+        </form>
+      </div>
+
+      <h2>Existing reviews</h2>
+      <div id="reviews-list"><p>Loading…</p></div>
+    </section>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

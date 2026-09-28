@@ -17,6 +17,7 @@ class Review(Base):
     )
     client_name: Mapped[str] = mapped_column(String(200), nullable=False)
     company: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    avatar_url: Mapped[str | None] = mapped_column(String(1000), nullable=True)
     quote: Mapped[str] = mapped_column(Text, nullable=False)
     rating: Mapped[int] = mapped_column(SmallInteger, nullable=False)
     is_published: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false", index=True)

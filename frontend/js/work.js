@@ -6,6 +6,14 @@ function escapeHtml(value) {
   return div.innerHTML;
 }
 
+function getInitials(name) {
+  const parts = (name ?? "").trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return "?";
+  const first = parts[0][0] ?? "";
+  const last = parts.length > 1 ? parts[parts.length - 1][0] ?? "" : "";
+  return (first + last).toUpperCase();
+}
+
 function renderPortfolio(items) {
   const grid = document.getElementById("portfolio-grid");
   if (!items.length) {
@@ -14,18 +22,23 @@ function renderPortfolio(items) {
   }
 
   grid.innerHTML = items
-    .map(
-      (item) => `
-      <article class="card portfolio-card reveal in-view">
+    .map((item) => {
+      const tag = item.project_url ? "a" : "article";
+      const linkAttrs = item.project_url
+        ? `href="${escapeHtml(item.project_url)}" target="_blank" rel="noopener noreferrer"`
+        : "";
+      return `
+      <${tag} class="card portfolio-card reveal in-view" ${linkAttrs}>
         <div class="cover">
           ${item.cover_image_url ? `<img src="${escapeHtml(item.cover_image_url)}" alt="${escapeHtml(item.title)}">` : "No image"}
         </div>
         <div class="category">${escapeHtml(item.category)}</div>
         <h3>${escapeHtml(item.title)}</h3>
         <p>${escapeHtml(item.client_name)}</p>
-      </article>
-    `
-    )
+        ${item.project_url ? `<span class="portfolio-link">View project &rarr;</span>` : ""}
+      </${tag}>
+    `;
+    })
     .join("");
 }
 
@@ -40,9 +53,22 @@ function renderReviews(items) {
     .map(
       (item) => `
       <article class="card review-card reveal in-view">
-        <div class="stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</div>
+        <div class="review-header">
+          ${
+            item.avatar_url
+              ? `<img class="avatar" src="${escapeHtml(item.avatar_url)}" alt="${escapeHtml(item.client_name)}">`
+              : `<div class="avatar avatar-initials">${escapeHtml(getInitials(item.client_name))}</div>`
+          }
+          <div class="client">
+            <div class="client-name">${escapeHtml(item.client_name)}</div>
+            ${item.company ? `<div class="client-company">${escapeHtml(item.company)}</div>` : ""}
+          </div>
+        </div>
+        <div class="rating-row">
+          <span class="stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</span>
+          <span class="score">${item.rating}/5</span>
+        </div>
         <p class="quote">&ldquo;${escapeHtml(item.quote)}&rdquo;</p>
-        <div class="client">${escapeHtml(item.client_name)}${item.company ? ` — ${escapeHtml(item.company)}` : ""}</div>
       </article>
     `
     )

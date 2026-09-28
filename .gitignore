@@ -1,10 +1,16 @@
 .env
+.env.local
+.env.*.local
 .venv/
 venv/
 __pycache__/
 *.pyc
 .pytest_cache/
 *.egg-info/
+node_modules/
 .DS_Store
+Thumbs.db
+*.log
 .idea/
 .vscode/
+reference/

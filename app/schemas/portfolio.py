@@ -12,6 +12,7 @@ class PortfolioBase(BaseModel):
     description: str = Field(..., max_length=5000)
     cover_image_url: str | None = Field(default=None, max_length=1000)
     gallery: list[str] = Field(default_factory=list, max_length=50)
+    project_url: str | None = Field(default=None, max_length=1000)
     is_published: bool = False
 
 
@@ -27,6 +28,7 @@ class PortfolioUpdate(BaseModel):
     description: str | None = Field(default=None, max_length=5000)
     cover_image_url: str | None = Field(default=None, max_length=1000)
     gallery: list[str] | None = Field(default=None, max_length=50)
+    project_url: str | None = Field(default=None, max_length=1000)
     is_published: bool | None = None
 
 

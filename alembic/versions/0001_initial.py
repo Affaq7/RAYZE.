@@ -20,14 +20,45 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     op.execute('CREATE EXTENSION IF NOT EXISTS "pgcrypto"')
 
+    # Guarded, idempotent raw SQL instead of SQLAlchemy's check-then-create
+    # Enum.create(): over a pooled connection (PgBouncer/Supavisor), the
+    # client-side "does this type exist" check and the CREATE TYPE that
+    # follows it are two separate round trips, leaving a race window where
+    # Postgres reports a duplicate even though the type didn't exist a
+    # moment earlier. A single DO block does the check-and-create atomically
+    # in one server-side statement.
+    op.execute(
+        """
+        DO $$ BEGIN
+            CREATE TYPE job_application_status AS ENUM ('new', 'reviewed', 'contacted', 'rejected', 'hired');
+        EXCEPTION
+            WHEN duplicate_object THEN null;
+        END $$;
+        """
+    )
+    op.execute(
+        """
+        DO $$ BEGIN
+            CREATE TYPE contact_submission_status AS ENUM ('new', 'contacted', 'archived');
+        EXCEPTION
+            WHEN duplicate_object THEN null;
+        END $$;
+        """
+    )
+
+    # create_type=False: the types above already exist, and SQLAlchemy's
+    # default create_type=True would otherwise try its own check-then-create
+    # again when compiling CREATE TABLE, hitting the exact same race.
     job_application_status = postgresql.ENUM(
-        "new", "reviewed", "contacted", "rejected", "hired", name="job_application_status"
+        "new", "reviewed", "contacted", "rejected", "hired",
+        name="job_application_status",
+        create_type=False,
     )
     contact_submission_status = postgresql.ENUM(
-        "new", "contacted", "archived", name="contact_submission_status"
+        "new", "contacted", "archived",
+        name="contact_submission_status",
+        create_type=False,
     )
-    job_application_status.create(op.get_bind())
-    contact_submission_status.create(op.get_bind())
 
     op.create_table(
         "portfolio",
@@ -130,5 +161,5 @@ def downgrade() -> None:
     op.drop_index("ix_portfolio_slug", table_name="portfolio")
     op.drop_table("portfolio")
 
-    postgresql.ENUM(name="contact_submission_status").drop(op.get_bind())
-    postgresql.ENUM(name="job_application_status").drop(op.get_bind())
+    op.execute("DROP TYPE IF EXISTS contact_submission_status")
+    op.execute("DROP TYPE IF EXISTS job_application_status")

@@ -10,7 +10,7 @@ admin login. Home/About/Services content stays frontend-driven for now.
 - FastAPI (async) + Uvicorn
 - SQLAlchemy 2.0 (async, via asyncpg) talking directly to Supabase Postgres
 - Alembic migrations
-- Supabase Auth — FastAPI verifies Supabase-issued JWTs (`PyJWT`), it does not implement its own auth
+- Supabase Auth — FastAPI verifies Supabase-issued JWTs against the project's published JWKS (`PyJWT`), it does not implement its own auth or store a fixed JWT secret
 - Resend for transactional email
 - Supabase Storage for portfolio images (public) and resumes (private)
 - slowapi for rate limiting
@@ -40,7 +40,6 @@ All variables live in `.env` (never committed — `.env.example` has placeholder
 | `SUPABASE_URL` | Project Settings → API | Used for Storage REST calls. |
 | `SUPABASE_ANON_KEY` | Project Settings → API | Not currently used server-side, kept for completeness/future frontend use. |
 | `SUPABASE_SERVICE_ROLE_KEY` | Project Settings → API | Used server-side only, for Storage uploads/signed URLs. Never expose this to the frontend. |
-| `SUPABASE_JWT_SECRET` | Project Settings → API → JWT Settings | Used to verify Supabase-issued access tokens on admin routes. |
 | `RESEND_API_KEY` | resend.com → API Keys | See SECURITY.md for the manual step of generating this. |
 | `RESEND_FROM_EMAIL` | — | Must be a verified sending address/domain in Resend. |
 | `TEAM_NOTIFICATION_EMAIL` | — | Where contact/application notifications are sent. |

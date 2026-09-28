@@ -5,23 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services — RAYZE</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo"><span class="logo-mark"></span>RAYZE.</a>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="work.html">Portfolio &amp; Reviews</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <div class="nav-bar">
+      <a href="index.html" class="logo"><img src="logos/mark-red.png" class="logo-mark-img" alt="RAYZE">RAYZE.</a>
+      <nav>
+        <span class="nav-highlight" aria-hidden="true"></span>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="work.html">Portfolio &amp; Reviews</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -30,8 +40,8 @@
   <section class="hero">
     <div class="container">
       <h1>Everything a brand<br>needs to be loud.</h1>
-      <p class="lede">From first strategy session to the ad spend hitting the platform —
-        one team, one plan, no hand-offs.</p>
+      <p class="lede">Six disciplines, one team — from the first post to the platform
+        it runs on, built and maintained in-house.</p>
     </div>
   </section>
 
@@ -42,32 +52,49 @@
       <div class="numbered-section reveal">
         <div class="num">01</div>
         <div>
-          <h3>Strategy &amp; Positioning</h3>
-          <p>Market research, competitive audits, and messaging frameworks that make every
-            downstream decision easier.</p>
+          <h3>Social Media Management</h3>
+          <p>Content calendars, community management, and platform strategy that keep your
+            brand posting with purpose, not just presence.</p>
         </div>
       </div>
       <div class="numbered-section reveal">
         <div class="num">02</div>
         <div>
-          <h3>Content &amp; Production</h3>
-          <p>Photo, video, and design produced in-house — built for the platforms it'll
-            actually run on.</p>
+          <h3>Logo Design</h3>
+          <p>A mark built to hold up at every size, on every surface — from a favicon to a
+            billboard.</p>
         </div>
       </div>
       <div class="numbered-section reveal">
         <div class="num">03</div>
         <div>
-          <h3>Paid Media</h3>
-          <p>Media buying across search, social, and programmatic, optimized weekly against
-            real business outcomes.</p>
+          <h3>Brand Design</h3>
+          <p>Color, type, and visual language systemized into guidelines your whole team can
+            actually use.</p>
         </div>
       </div>
       <div class="numbered-section reveal">
         <div class="num">04</div>
         <div>
-          <h3>Analytics &amp; Reporting</h3>
-          <p>Dashboards your team will actually open — clear numbers, no vanity metrics.</p>
+          <h3>Video Editing &amp; Animation</h3>
+          <p>Short-form cuts, motion graphics, and animated assets produced for the feed
+            they're built for.</p>
+        </div>
+      </div>
+      <div class="numbered-section reveal">
+        <div class="num">05</div>
+        <div>
+          <h3>Website</h3>
+          <p>Fast, on-brand sites and landing pages that convert traffic instead of just
+            hosting it.</p>
+        </div>
+      </div>
+      <div class="numbered-section reveal">
+        <div class="num">06</div>
+        <div>
+          <h3>Automations</h3>
+          <p>Workflow and marketing automation that takes the repetitive work off your
+            team's plate for good.</p>
         </div>
       </div>
     </div>
@@ -85,8 +112,14 @@
 
 <footer class="site-footer">
   <div class="container">
-    <span>&copy; 2026 RAYZE. All rights reserved.</span>
-    <span>Prototype build — not final copy or imagery.</span>
+    <div class="footer-brand">
+      <img src="logos/mark-red.png" class="logo-mark-img" alt="RAYZE">
+      <span class="footer-tagline">Rise with RAYZE.</span>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 RAYZE. All rights reserved.</span>
+      <span>Prototype build — not final copy or imagery.</span>
+    </div>
   </div>
 </footer>
 

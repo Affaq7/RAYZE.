@@ -4,7 +4,6 @@ os.environ.setdefault("SUPABASE_DB_URL", "postgresql+asyncpg://user:pass@localho
 os.environ.setdefault("SUPABASE_URL", "https://test-project.supabase.co")
 os.environ.setdefault("SUPABASE_ANON_KEY", "test-anon-key")
 os.environ.setdefault("SUPABASE_SERVICE_ROLE_KEY", "test-service-role-key")
-os.environ.setdefault("SUPABASE_JWT_SECRET", "test-jwt-secret")
 os.environ.setdefault("RESEND_API_KEY", "test-resend-key")
 os.environ.setdefault("RESEND_FROM_EMAIL", "RAYZE <test@example.com>")
 os.environ.setdefault("TEAM_NOTIFICATION_EMAIL", "team@example.com")

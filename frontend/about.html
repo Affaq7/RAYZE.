@@ -5,23 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — RAYZE</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo"><span class="logo-mark"></span>RAYZE.</a>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="work.html">Portfolio &amp; Reviews</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <div class="nav-bar">
+      <a href="index.html" class="logo"><img src="logos/mark-red.png" class="logo-mark-img" alt="RAYZE">RAYZE.</a>
+      <nav>
+        <span class="nav-highlight" aria-hidden="true"></span>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="work.html">Portfolio &amp; Reviews</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -105,8 +115,14 @@
 
 <footer class="site-footer">
   <div class="container">
-    <span>&copy; 2026 RAYZE. All rights reserved.</span>
-    <span>Prototype build — not final copy or imagery.</span>
+    <div class="footer-brand">
+      <img src="logos/mark-red.png" class="logo-mark-img" alt="RAYZE">
+      <span class="footer-tagline">Rise with RAYZE.</span>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 RAYZE. All rights reserved.</span>
+      <span>Prototype build — not final copy or imagery.</span>
+    </div>
   </div>
 </footer>
 

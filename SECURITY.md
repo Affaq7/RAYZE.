@@ -14,11 +14,18 @@
   (containing applicant PII and resumes) would be directly readable via the
   public anon key, regardless of anything FastAPI does.
 - **JWT verification, not custom auth.** `app/core/security.py` verifies
-  Supabase-issued access tokens using `SUPABASE_JWT_SECRET` (via `PyJWT`,
-  with the algorithm pinned explicitly to `HS256` to avoid algorithm-confusion
-  attacks). Any validly signed, non-expired token is treated as admin — there
-  is no roles table; admin identity is fully controlled by who exists in
-  Supabase Auth. **Because of this, disabling public sign-ups (below) is not
+  Supabase-issued access tokens against the project's published JWKS
+  (`{SUPABASE_URL}/auth/v1/.well-known/jwks.json`) via `PyJWT`'s
+  `PyJWKClient`, with the algorithm restricted explicitly to `ES256`/`RS256`
+  to avoid algorithm-confusion attacks. This is deliberate, not just a fixed
+  shared secret: Supabase now signs tokens with per-project asymmetric keys
+  that rotate over time, so verifying against the live JWKS (rather than a
+  `SUPABASE_JWT_SECRET` copied into `.env`) keeps working automatically
+  through those rotations instead of silently breaking admin login after the
+  next key rotation. Any validly signed, non-expired token is treated as
+  admin — there is no roles table; admin identity is fully controlled by who
+  exists in Supabase Auth. **Because of this, disabling public sign-ups
+  (below) is not
   optional.**
 - **Private resumes, no stored public links.** The `resumes` bucket is
   private. Uploads store only the object path in `job_applications.resume_path`.

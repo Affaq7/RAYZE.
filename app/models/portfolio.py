@@ -21,6 +21,7 @@ class Portfolio(Base):
     description: Mapped[str] = mapped_column(Text, nullable=False)
     cover_image_url: Mapped[str | None] = mapped_column(String(1000), nullable=True)
     gallery: Mapped[list[str]] = mapped_column(ARRAY(String(1000)), nullable=False, server_default="{}")
+    project_url: Mapped[str | None] = mapped_column(String(1000), nullable=True)
     is_published: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false", index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(

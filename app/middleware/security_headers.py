@@ -19,7 +19,20 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-        response.headers["Content-Security-Policy"] = "default-src 'self'"
+
+        if request.url.path in ("/docs", "/redoc"):
+            # The interactive API docs load Swagger/Redoc's JS+CSS from a CDN
+            # and run inline scripts to boot themselves -- the default strict
+            # CSP silently blocks all of that, rendering a blank page. Docs
+            # are dev-only anyway (disabled in production, see main.py).
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'self'; "
+                "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+                "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+                "img-src 'self' data: https://cdn.jsdelivr.net https://fastapi.tiangolo.com"
+            )
+        else:
+            response.headers["Content-Security-Policy"] = "default-src 'self'"
 
         if request.url.scheme == "https":
             response.headers["Strict-Transport-Security"] = "max-age=63072000; includeSubDomains"
